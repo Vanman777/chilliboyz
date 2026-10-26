@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChilliBoyz: Ignite Your Taste Buds</title>
+<meta name="description" content="Heat seekers, rejoice! ChilliBoyz offers a wide selection of hot sauces, spices and challenges that will tantalize your taste buds. Explore our premium hot sauces and take on our Chip Challenge for an unforgettable journey.">
+<link rel="canonical" href="https://chilliboyz.co.za/">
+<link rel="icon" type="image/png" href="images/Logo.png">
+
+<meta property="og:site_name" content="ChilliBoyz">
+<meta property="og:url" content="https://chilliboyz.co.za/">
+<meta property="og:title" content="ChilliBoyz: Ignite Your Taste Buds">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Hot sauces, braai craft butters and extreme chilli challenges from South Africa.">
+<meta property="og:image" content="https://chilliboyz.co.za/images/Logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #000;
+    --fg: #eff0f5;
+    --red: #dd1d1d;
+    --red-dark: #b81515;
+    --card: #111;
+    --line: #2a2a2a;
+    --muted: #a8a9b0;
+    --maxw: 1100px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: #fff; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+  /* Announcement bar */
+  .announce {
+    background: var(--red);
+    color: #fff;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+  .announce a { font-weight: 700; }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(0,0,0,.95);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+  }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 10px 20px;
+    max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand img { width: 64px; height: 64px; }
+  nav.main ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; }
+  nav.main a { text-decoration: none; font-size: .95rem; padding: 6px 0; border-bottom: 2px solid transparent; }
+  nav.main a:hover { border-color: var(--red); }
+  .menu-btn {
+    display: none; background: none; border: 1px solid var(--line); color: #fff;
+    font: inherit; padding: 8px 14px; border-radius: 6px; cursor: pointer;
+  }
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    nav.main { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #000; border-bottom: 1px solid var(--line); padding: 10px 20px 16px; }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; gap: 4px; }
+    nav.main a { display: block; padding: 10px 0; }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; background: var(--red); color: #fff; text-decoration: none;
+    font-weight: 700; padding: 12px 26px; border-radius: 6px; border: 0; cursor: pointer;
+    transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; border: 2px solid var(--red); }
+  .btn.ghost:hover { background: var(--red); }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .split { display: grid; gap: 36px; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 800px) {
+    .split { grid-template-columns: 1fr 1fr; }
+    .split.reverse > :first-child { order: 2; }
+  }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 14px; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .eyebrow { letter-spacing: .18em; text-transform: uppercase; font-size: .8rem; color: var(--muted); margin: 0 0 8px; }
+  .media img { border-radius: 10px; width: 100%; }
+  .center { text-align: center; }
+  .lead { color: #d8d9e0; }
+
+  .focus { background: #0a0a0a; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .focus img { max-width: 420px; margin: 0 auto; }
+
+  /* Products */
+  .intro { max-width: 760px; margin: 0 auto 36px; color: #d8d9e0; }
+  .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .card img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+  .card .body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card h3 { font-size: 1rem; margin: 0; }
+  .price { font-weight: 700; font-size: 1.1rem; }
+  .card .btn { margin-top: auto; text-align: center; padding: 10px 14px; font-size: .92rem; }
+  .sold { background: #333; color: #aaa; cursor: not-allowed; pointer-events: none; }
+  .sold:hover { background: #333; transform: none; }
+
+  /* Community / contact */
+  .community { background: #0a0a0a; border-top: 1px solid var(--line); }
+  .contact-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+  .socials { display: flex; flex-wrap: wrap; gap: 12px 22px; justify-content: center; margin-top: 22px; }
+
+  footer.site { border-top: 1px solid var(--line); padding: 28px 0; text-align: center; color: var(--muted); font-size: .88rem; }
+</style>
+</head>
+
+<body>
+
+<div class="announce">
+  <strong>IMPORTANT:</strong> To keep costs as low as possible, online ordering is paused. To place an order, WhatsApp Gerhard or Riaan on
+  <a href="https://wa.me/27721932442">072 193 2442</a> /
+  <a href="https://wa.me/27825210057">082 521 0057</a>.
+</div>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#home" aria-label="ChilliBoyz home"><img src="images/Logo.png" alt="ChilliBoyz" width="64" height="64"></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav class="main" id="mainNav" aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#butters">Braai Craft Butters</a></li>
+        <li><a href="#products">Products &amp; Shop</a></li>
+        <li><a href="#challenge">Full Chip Challenge</a></li>
+        <li><a href="https://www.youtube.com/@chilliboyzsouthafrica458" target="_blank" rel="noopener">Challenges &amp; Videos</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- Just launched -->
+  <section id="butters">
+    <div class="wrap split">
+      <div class="media">
+        <img src="images/Mockup_All.png" alt="ChilliBoyz Braai Craft Butters" width="1500" height="1000">
+      </div>
+      <div>
+        <p class="eyebrow">ChilliBoyz</p>
+        <h2>Just Launched</h2>
+        <p>🔥 <strong>Level up your next braai!</strong> 🔥</p>
+        <p>Our brand-new <strong>Braai Craft Butters</strong> have officially landed! 🥩✨ We have melted down pure, premium goodness and packed it with mouth-watering local flavors to give your meats, garlic breads, veggies and everything in between the ultimate sizzle. Don't let your meat go naked this weekend. Pre-orders are available. Collections and deliveries will be available from next week.</p>
+        <p>🛒 Your braai grid will thank you!</p>
+        <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27d%20like%20to%20order%20the%20Braai%20Craft%20Butters." target="_blank" rel="noopener">Order on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- New focus -->
+  <section class="focus">
+    <div class="wrap split">
+      <div class="media">
+        <img src="images/03.19.2020.png" alt="" width="1500" height="750">
+      </div>
+      <div>
+        <h2>New Focus, Same Promise, Same Brand!</h2>
+        <p>🔥 Welcome to the NEW Experience</p>
+        <p>We’ve decided to shake things up — stepping away from sauces and spices to focus on something new, unique, and seriously exciting.</p>
+        <p>Bigger flavor. Bigger WOW. Bigger experience.</p>
+        <p>We now focus on two things that matter most:</p>
+        <p>🔥 Rich, flavor-packed <strong>(REVEALING 3 July 2026)</strong><br>
+           🔥 Extreme, unforgettable chilli challenges</p>
+        <p>From bold <strong>(REVEALING 3 July 2026)</strong> that melt into every bite, to challenges that push your limits, everything we create is designed to deliver real flavor, real heat, and real experience. Are you here for the taste… or the challenge?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chip challenge -->
+  <section id="challenge">
+    <div class="wrap split reverse">
+      <div class="media">
+        <img src="images/Chip_resized_6de9e640-796f-49e8-8095-de5e6c4f7565.png" alt="ChilliBoyz Full Chip Challenge" width="1500" height="1310" loading="lazy">
+      </div>
+      <div class="center">
+        <p class="eyebrow">ChilliBoyz</p>
+        <h2>ARE YOU UP FOR THE CHALLENGE?</h2>
+        <p>So you have seen the international Chip Challenge on social media, but did you know that you can source a locally produced Chip Challenge for a fraction of the price that is more fun and interactive than the one chip challenge? Brace yourself for the ChilliBoyz Full Chip Challenge — an explosion of fiery flavors as you dive into a world of intensely spicy, handcrafted chips. From mild jalapeño, blazing habanero to the sting of the Carolina Reaper, our hot chip challenge is designed to push your palate to the limits. Can you handle the heat? Elevate your snacking game with our bold and intense hot chips. Are you up for the challenge?</p>
+        <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27m%20up%20for%20the%20ChilliBoyz%20Full%20Chip%20Challenge!" target="_blank" rel="noopener">Challenge Accepted</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="focus">
+    <div class="wrap">
+      <h2 class="center">Featured products</h2>
+      <p class="intro center">Welcome to the fiery world of ChilliBoyz, where passion meets flavor spice! Our hot sauce collection is a symphony of bold flavors and heat, meticulously crafted to ignite your taste buds and elevate your culinary adventures. Each bottle is a testament to our commitment to quality, flavor, and the art of heat.</p>
+
+      <div class="grid">
+        <article class="card">
+          <img src="images/MonsterGoo.jpg" alt="Monster Goo" width="1280" height="1280" loading="lazy">
+          <div class="body">
+            <h3>Monster Goo - Jamn-gooooodness</h3>
+            <div class="price">R 50.00</div>
+            <span class="btn sold" aria-disabled="true">Sold out</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/PoisonArrow.jpg" alt="Poison Arrow Sauce" width="1280" height="1280" loading="lazy">
+          <div class="body">
+            <h3>Poison Arrow Sauce - Won "Best Tasting Sauce" at Chilli Festival in Hartebeespoort</h3>
+            <div class="price">R 150.00</div>
+            <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27d%20like%20to%20order%20Poison%20Arrow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/NuclearCherry.jpg" alt="Nuclear Cherry Sauce" width="1280" height="1280" loading="lazy">
+          <div class="body">
+            <h3>Nuclear Cherry Sauce - Explosive Heat Meets Sweet Cherry Bliss!</h3>
+            <div class="price">R 150.00</div>
+            <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27d%20like%20to%20order%20Nuclear%20Cherry%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/BlackWidow.jpg" alt="Black Widow Sauce" width="1280" height="1280" loading="lazy">
+          <div class="body">
+            <h3>Black Widow Sauce - Unleash the Sting of the Carolina Reaper!</h3>
+            <div class="price">R 120.00</div>
+            <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27d%20like%20to%20order%20Black%20Widow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/RedWidow.jpg" alt="Red Widow Sauce" width="1280" height="1280" loading="lazy">
+          <div class="body">
+            <h3>Red Widow Sauce - A Tabasco Twist on the Legendary Black Widow!</h3>
+            <div class="price">R 120.00</div>
+            <a class="btn" href="https://wa.me/27721932442?text=Hi%2C%20I%27d%20like%20to%20order%20Red%20Widow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community / contact -->
+  <section id="contact" class="community">
+    <div class="wrap center">
+      <h2>Join the ChilliBoyz community</h2>
+      <p class="lead">Remember to subscribe to our WhatsApp Community channel for all specials and promotions. Only admins can post, so you will NOT be spammed.</p>
+      <p><a class="btn" href="https://chat.whatsapp.com/FgiBBfKDXl0CQJ2URDt0z3" target="_blank" rel="noopener">Join us on WhatsApp</a></p>
+
+      <ul class="contact-list">
+        <li>Orders &amp; questions: <a href="https://wa.me/27721932442?text=Hi%2C%20I%20was%20browsing%20your%20ChilliBoyz%20Webpage.%20Please%20could%20you%20assist%3F">Gerhard – 072 193 2442</a></li>
+        <li><a href="https://wa.me/27825210057?text=Hi%2C%20I%20was%20browsing%20your%20ChilliBoyz%20Webpage.%20Please%20could%20you%20assist%3F">Riaan – 082 521 0057</a></li>
+      </ul>
+
+      <div class="socials">
+        <a href="http://www.facebook.com/chilliboyz.co.za" target="_blank" rel="noopener">Facebook</a>
+        <a href="http://www.instagram.com/chilliboyz.co.za" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@chilliboyz.co.za" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@chilliboyzsouthafrica458" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 ChilliBoyz</div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('mainNav');
+  btn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+</body>
+</html>
