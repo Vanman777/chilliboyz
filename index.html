@@ -120,6 +120,25 @@
   .socials { display: flex; flex-wrap: wrap; gap: 12px 22px; justify-content: center; margin-top: 22px; }
 
   footer.site { border-top: 1px solid var(--line); padding: 28px 0; text-align: center; color: var(--muted); font-size: .88rem; }
+
+  /* Online shop */
+  .cart-button{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer}
+  .cart-count{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;background:#fff;color:#000;border-radius:999px;font-size:.78rem}
+  .shop-status{padding:24px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--muted)}
+  .stock{font-size:.78rem;color:#76d49b}.stock.low{color:#ffb24c}.stock.out{color:#ff766e}
+  .product-actions{display:grid;grid-template-columns:110px 1fr;gap:10px;margin-top:auto}
+  .qty{display:grid;grid-template-columns:34px 40px 34px;border:1px solid var(--line);border-radius:999px;overflow:hidden}.qty button{border:0;background:#1b1b1b;color:#fff}.qty span{display:grid;place-items:center;font-weight:700}
+  .add-cart{border:0;border-radius:999px;background:var(--red);color:#fff;font-weight:700}.add-cart:disabled{background:#333;color:#999}
+  .overlay{position:fixed;inset:0;z-index:100;visibility:hidden;background:rgba(0,0,0,0);transition:.2s}.overlay.open{visibility:visible;background:rgba(0,0,0,.78)}
+  .cart-panel{position:absolute;right:0;top:0;width:min(460px,100%);height:100%;display:flex;flex-direction:column;background:#101010;border-left:1px solid var(--line);transform:translateX(100%);transition:.25s}.overlay.open .cart-panel{transform:none}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--line)}.panel-head h2{margin:0}.icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#1b1b1b;color:#fff}
+  .cart-items{flex:1;overflow:auto;padding:14px 20px}.cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.cart-item h4{margin:0 0 5px}.cart-item-actions{display:flex;align-items:center;gap:7px}.cart-item-actions button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#1b1b1b;color:#fff}
+  .cart-summary{padding:20px;background:#171717;border-top:1px solid var(--line)}.sum{display:flex;justify-content:space-between;margin:8px 0}.sum.total{font-size:1.2rem;font-weight:700;border-top:1px solid var(--line);padding-top:12px;margin-top:12px}.wide-btn{width:100%;min-height:48px;border:0;border-radius:999px;background:var(--red);color:#fff;font-weight:700}.wide-btn:disabled{background:#333;color:#999}
+  .checkout-overlay{display:grid;place-items:center;padding:16px;overflow:auto}.checkout-dialog{width:min(650px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#101010;border:1px solid var(--line);border-radius:18px;transform:translateY(18px);opacity:0;transition:.2s}.overlay.open .checkout-dialog{transform:none;opacity:1}
+  .checkout-body{padding:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}.field input,.field select,.field textarea{padding:12px;background:#181818;color:#fff;border:1px solid var(--line);border-radius:9px}.field textarea{min-height:80px}.delivery-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.delivery-options label{padding:12px;background:#181818;border:1px solid var(--line);border-radius:9px}.shipping-fields{display:none}.shipping-fields.show{display:grid;grid-template-columns:1fr 1fr;gap:14px}.checkout-summary{margin:18px 0;padding:15px;background:#181818;border-radius:10px}.checkout-error{display:none;color:#ff8a82;background:#331518;padding:10px;border-radius:8px;margin-bottom:12px}.checkout-error.show{display:block}.success{display:none;padding:35px;text-align:center}.success.show{display:block}
+  @media(max-width:860px){.bar{flex-wrap:wrap}.cart-button{margin-left:auto}}
+  @media(max-width:600px){.product-actions,.form-grid,.delivery-options,.shipping-fields.show{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -139,6 +158,7 @@
         <li><a href="#contact">Contact Us</a></li>
       </ul>
     </nav>
+    <button id="openCart" class="cart-button" type="button">Cart <span id="cartCount" class="cart-count">0</span></button>
   </div>
 </header>
 
@@ -201,52 +221,9 @@
       <h2 class="center">Featured products</h2>
       <p class="intro center">Welcome to the fiery world of ChilliBoyz, where passion meets flavor spice! Our hot sauce collection is a symphony of bold flavors and heat, meticulously crafted to ignite your taste buds and elevate your culinary adventures. Each bottle is a testament to our commitment to quality, flavor, and the art of heat.</p>
 
-      <div class="grid">
-        <article class="card">
-          <img src="MonsterGoo.jpg" alt="Monster Goo" width="1280" height="1280" loading="lazy">
-          <div class="body">
-            <h3>Monster Goo - Jamn-gooooodness</h3>
-            <div class="price">R 50.00</div>
-            <span class="btn sold" aria-disabled="true">Sold out</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="PoisonArrow.jpg" alt="Poison Arrow Sauce" width="1280" height="1280" loading="lazy">
-          <div class="body">
-            <h3>Poison Arrow Sauce - Won "Best Tasting Sauce" at Chilli Festival in Hartebeespoort</h3>
-            <div class="price">R 150.00</div>
-            <a class="btn" href="https://wa.me/27772711349?text=Hi%2C%20I%27d%20like%20to%20order%20Poison%20Arrow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="NuclearCherry.jpg" alt="Nuclear Cherry Sauce" width="1280" height="1280" loading="lazy">
-          <div class="body">
-            <h3>Nuclear Cherry Sauce - Explosive Heat Meets Sweet Cherry Bliss!</h3>
-            <div class="price">R 150.00</div>
-            <a class="btn" href="https://wa.me/27772711349?text=Hi%2C%20I%27d%20like%20to%20order%20Nuclear%20Cherry%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="BlackWidow.jpg" alt="Black Widow Sauce" width="1280" height="1280" loading="lazy">
-          <div class="body">
-            <h3>Black Widow Sauce - Unleash the Sting of the Carolina Reaper!</h3>
-            <div class="price">R 120.00</div>
-            <a class="btn" href="https://wa.me/27772711349?text=Hi%2C%20I%27d%20like%20to%20order%20Black%20Widow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="RedWidow.jpg" alt="Red Widow Sauce" width="1280" height="1280" loading="lazy">
-          <div class="body">
-            <h3>Red Widow Sauce - A Tabasco Twist on the Legendary Black Widow!</h3>
-            <div class="price">R 120.00</div>
-            <a class="btn" href="https://wa.me/27772711349?text=Hi%2C%20I%27d%20like%20to%20order%20Red%20Widow%20Sauce." target="_blank" rel="noopener">Order on WhatsApp</a>
-          </div>
-        </article>
-      </div>
+      <div id="shopLoading" class="shop-status">Loading the ChilliBoyz range...</div>
+      <div id="shopError" class="shop-status" hidden></div>
+      <div id="productGrid" class="grid"></div>
     </div>
   </section>
 
@@ -272,22 +249,34 @@
 
 </main>
 
+
+<div id="cartOverlay" class="overlay" aria-hidden="true"><aside class="cart-panel"><div class="panel-head"><h2>Your cart</h2><button id="closeCart" class="icon-btn" type="button">✕</button></div><div id="cartItems" class="cart-items"></div><div class="cart-summary"><div class="sum"><span>Items</span><strong id="cartSubtotal">R0.00</strong></div><div class="sum total"><span>Total</span><strong id="cartTotal">R0.00</strong></div><button id="checkoutButton" class="wide-btn" type="button" disabled>Continue to checkout</button></div></aside></div>
+<div id="checkoutOverlay" class="overlay checkout-overlay" aria-hidden="true"><section class="checkout-dialog"><div id="checkoutView"><div class="panel-head"><div><h2>Checkout</h2><small>Complete your details to place your order.</small></div><button id="closeCheckout" class="icon-btn" type="button">✕</button></div><form id="checkoutForm" class="checkout-body"><div class="form-grid">
+<div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" required></div><div class="field"><label for="surname">Surname</label><input id="surname" name="surname" required></div><div class="field"><label for="cellphone">Cellphone</label><input id="cellphone" name="cellphone" type="tel" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+<div class="field full"><label>Delivery method</label><div class="delivery-options"><label><input type="radio" name="deliveryMethod" value="COLLECTION" checked> Collection</label><label><input type="radio" name="deliveryMethod" value="PUDO_BOX_TO_BOX"> PUDO Box to Box</label><label><input type="radio" name="deliveryMethod" value="PUDO_BOX_TO_DOOR"> PUDO Box to Door</label></div></div>
+<div id="paymentDateField" class="field full"><label for="requestedPaymentDate">Preferred payment or collection date (optional)</label><input id="requestedPaymentDate" name="requestedPaymentDate" type="date"></div>
+<div id="shippingFields" class="shipping-fields full"><div class="field full"><label for="deliveryAddress">Delivery address or PUDO locker</label><input id="deliveryAddress" name="deliveryAddress"></div><div class="field"><label for="deliverySuburb">Suburb</label><input id="deliverySuburb" name="deliverySuburb"></div><div class="field"><label for="deliveryCity">City</label><input id="deliveryCity" name="deliveryCity"></div><div class="field"><label for="deliveryProvince">Province</label><select id="deliveryProvince" name="deliveryProvince"><option value="">Select province</option><option>Eastern Cape</option><option>Free State</option><option>Gauteng</option><option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Northern Cape</option><option>Western Cape</option></select></div><div class="field"><label for="deliveryPostalCode">Postal code</label><input id="deliveryPostalCode" name="deliveryPostalCode" maxlength="4" pattern="[0-9]{4}"></div></div>
+<div class="field full"><label for="orderNotes">Order notes (optional)</label><textarea id="orderNotes" name="orderNotes"></textarea></div></div><div class="checkout-summary"><div class="sum"><span>Products</span><strong id="checkoutSubtotal">R0.00</strong></div><div class="sum"><span>Delivery</span><strong id="checkoutShipping">R0.00</strong></div><div class="sum total"><span>Total</span><strong id="checkoutTotal">R0.00</strong></div></div><div id="checkoutError" class="checkout-error"></div><button id="submitOrder" class="wide-btn" type="submit">Place order</button></form></div><div id="successView" class="success"><h2>Order created</h2><p>Your order has been received. Check your email for payment instructions.</p><h3 id="successRef"></h3><p id="successTotal"></p><button id="successClose" class="wide-btn" type="button">Return to shop</button></div></section></div>
+
 <footer class="site">
   <div class="wrap">© 2026 ChilliBoyz</div>
 </footer>
 
 <script>
-  // Mobile menu toggle
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('mainNav');
-  btn.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open);
-  });
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    nav.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
-  }));
+const API_URL='https://script.google.com/macros/s/AKfycbyhLljThdXFWLbIEzweRn8e_Jp5KNMYhfcIjK14t8aqHAeqZxc5WVjgkeSTnLqnPjKUdg/exec';
+const BUSINESS='CHILLIBOYZ';
+const state={products:[],cart:{},qty:{}};
+const $=id=>document.getElementById(id);const money=n=>'R'+(Number(n)||0).toFixed(2);const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const btn=$('menuBtn'),nav=$('mainNav');btn.addEventListener('click',()=>{const open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}));
+function product(id){return state.products.find(p=>p.productId===id)}function count(){return Object.values(state.cart).reduce((a,b)=>a+b,0)}function subtotal(){return Object.entries(state.cart).reduce((t,[id,q])=>t+(product(id)?.effectiveUnitPrice||0)*q,0)}
+function renderProducts(){const grid=$('productGrid');grid.innerHTML=state.products.map(p=>{const q=state.qty[p.productId]||1,out=p.availableStock<=0,low=!out&&p.availableStock<=5;return `<article class="card"><img src="${esc(p.imageUrl)}" alt="${esc(p.productName)}" loading="lazy"><div class="body"><h3>${esc(p.productName)}</h3><p>${esc(p.description)}</p><div class="price">${money(p.effectiveUnitPrice)}</div><div class="stock ${out?'out':low?'low':''}">${out?'Sold out':p.availableStock+' available'}</div><div class="product-actions"><div class="qty"><button type="button" data-minus="${p.productId}" ${out?'disabled':''}>−</button><span>${q}</span><button type="button" data-plus="${p.productId}" ${out?'disabled':''}>+</button></div><button class="add-cart" type="button" data-add="${p.productId}" ${out?'disabled':''}>${out?'Sold out':'Add to cart'}</button></div></div></article>`}).join('');grid.querySelectorAll('[data-minus]').forEach(b=>b.onclick=()=>{const id=b.dataset.minus;state.qty[id]=Math.max(1,(state.qty[id]||1)-1);renderProducts()});grid.querySelectorAll('[data-plus]').forEach(b=>b.onclick=()=>{const id=b.dataset.plus,p=product(id);state.qty[id]=Math.min(p.availableStock,(state.qty[id]||1)+1);renderProducts()});grid.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const id=b.dataset.add,p=product(id),q=state.qty[id]||1;state.cart[id]=Math.min(p.availableStock,(state.cart[id]||0)+q);renderCart();openOverlay('cartOverlay')})}
+function renderCart(){$('cartCount').textContent=count();const entries=Object.entries(state.cart).filter(([,q])=>q>0);$('cartItems').innerHTML=entries.length?entries.map(([id,q])=>{const p=product(id);return `<div class="cart-item"><div><h4>${esc(p.productName)}</h4><small>${money(p.effectiveUnitPrice)} each</small></div><div class="cart-item-actions"><button data-dec="${id}">−</button><strong>${q}</strong><button data-inc="${id}">+</button><button data-remove="${id}">×</button></div></div>`}).join(''):'<p>Your cart is empty.</p>';$('cartSubtotal').textContent=money(subtotal());$('cartTotal').textContent=money(subtotal());$('checkoutButton').disabled=!entries.length;$('cartItems').querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>{const id=b.dataset.dec;state.cart[id]--;if(state.cart[id]<=0)delete state.cart[id];renderCart()});$('cartItems').querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>{const id=b.dataset.inc,p=product(id);state.cart[id]=Math.min(p.availableStock,state.cart[id]+1);renderCart()});$('cartItems').querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{delete state.cart[b.dataset.remove];renderCart()})}
+function shipping(){const m=document.querySelector('[name=deliveryMethod]:checked')?.value||'COLLECTION',n=count();if(m==='COLLECTION')return 0;if(m==='PUDO_BOX_TO_DOOR')return n<=3?120:150;return n<=3?80:100}function updateCheckout(){const ship=shipping();$('checkoutSubtotal').textContent=money(subtotal());$('checkoutShipping').textContent=money(ship);$('checkoutTotal').textContent=money(subtotal()+ship)}
+function openOverlay(id){$(id).classList.add('open');$(id).setAttribute('aria-hidden','false')}function closeOverlay(id){$(id).classList.remove('open');$(id).setAttribute('aria-hidden','true')}
+$('openCart').onclick=()=>openOverlay('cartOverlay');$('closeCart').onclick=()=>closeOverlay('cartOverlay');$('closeCheckout').onclick=()=>closeOverlay('checkoutOverlay');$('checkoutButton').onclick=()=>{closeOverlay('cartOverlay');updateCheckout();openOverlay('checkoutOverlay')};document.querySelectorAll('[name=deliveryMethod]').forEach(r=>r.onchange=()=>{const collection=r.form.deliveryMethod.value==='COLLECTION';$('shippingFields').classList.toggle('show',!collection);$('paymentDateField').hidden=!collection;['deliveryAddress','deliverySuburb','deliveryCity','deliveryProvince','deliveryPostalCode'].forEach(id=>$(id).required=!collection);updateCheckout()});
+$('checkoutForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget),request={action:'createOrder',business:BUSINESS,customer:{firstName:String(f.get('firstName')||'').trim(),surname:String(f.get('surname')||'').trim(),cellphone:String(f.get('cellphone')||'').trim(),email:String(f.get('email')||'').trim()},delivery:{method:String(f.get('deliveryMethod')||'COLLECTION'),address:String(f.get('deliveryAddress')||'').trim(),suburb:String(f.get('deliverySuburb')||'').trim(),city:String(f.get('deliveryCity')||'').trim(),province:String(f.get('deliveryProvince')||'').trim(),postalCode:String(f.get('deliveryPostalCode')||'').trim(),country:'South Africa',countryCode:'ZA'},checkoutToken:'CBZ-'+Date.now()+'-'+Math.random().toString(36).slice(2),requestedPaymentDate:String(f.get('requestedPaymentDate')||''),items:Object.entries(state.cart).map(([productId,quantity])=>({productId,quantity})),notes:String(f.get('orderNotes')||'').trim()};$('checkoutError').classList.remove('show');$('submitOrder').disabled=true;$('submitOrder').textContent='Placing order...';try{const r=await fetch(API_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(request)});const result=await r.json();if(!result.success)throw new Error(result.message||'Order could not be created');$('checkoutView').hidden=true;$('successView').classList.add('show');$('successRef').textContent=result.order.orderId;$('successTotal').textContent='Order total: '+money(result.order.cart.orderTotal);state.cart={};renderCart()}catch(err){$('checkoutError').textContent=err.message;$('checkoutError').classList.add('show')}finally{$('submitOrder').disabled=false;$('submitOrder').textContent='Place order'}};
+$('successClose').onclick=()=>{closeOverlay('checkoutOverlay');$('checkoutView').hidden=false;$('successView').classList.remove('show');$('checkoutForm').reset();$('shippingFields').classList.remove('show');$('paymentDateField').hidden=false};
+async function initialise(){try{const r=await fetch(`${API_URL}?action=store&business=${BUSINESS}&t=${Date.now()}`,{cache:'no-store'});const data=await r.json();if(!data.success)throw new Error(data.message||'Store API error');state.products=data.products||[];state.products.forEach(p=>state.qty[p.productId]=1);$('shopLoading').hidden=true;renderProducts();renderCart()}catch(err){$('shopLoading').hidden=true;$('shopError').hidden=false;$('shopError').textContent='Products could not be loaded: '+err.message}}initialise();
 </script>
 </body>
 </html>
